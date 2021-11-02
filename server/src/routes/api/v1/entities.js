@@ -231,8 +231,7 @@ router.get('/:communityAddress', async (req, res, next) => {
   const { id } = req.user
   const userAccounts =  await UserAccount.find({ studioUser: ObjectId(id) })
   const result = {isAdmin: false, isOwner: false, creatorAddress: undefined}
-  let owned;
-  let mod;
+
     userAccounts.forEach(async (user) => {
       const entities = await Entity.find(ObjectId(user.accountAddress)).sort({ blockNumber: -1 })
       const data = await withCommunities(entities)
@@ -254,7 +253,43 @@ router.get('/:communityAddress', async (req, res, next) => {
   /* if user is on valid account return isAdmin: true, isOwner: true, accountAddress: account
   if user has valid account return isAdmin: false, isOwner: true, accountAddress: accountAddress
   if user is not owner return isAdmin: false, isOwner: false, accountAddress: undefined */
-  return res.json({account, id, response: result, owned, mod})
+  return res.json({account, id, response: result, userAccounts})
 })
+
+
+
+router.post('/test/:communityAddress/:account', auth.required,  async (req, res, next) => {
+  const { communityAddress, account } = req.params
+  const { id } = req.user
+
+  const community = await Community.findOne({ communityAddress: communityAddress })
+  const entity = await Entity.findOne({ account, communityAddress })
+
+  const result = {
+    community,
+    entity,
+    user: { account, id, isAdmin: false, isOwner: false }, check: false
+  }
+
+  if(entity.isAdmin){
+    result.user.isAdmin = true;
+  }
+  if(entity.account === account){
+    result.user.isOwner = true;
+  }
+
+  if(result.user.isAdmin && !result.user.isOwner){
+    const userAccounts =  await UserAccount.find({ studioUser: ObjectId(id) })
+    userAccounts.forEach(account =>{
+      if (account === result.community.creatorAddress){
+        result.check = true;
+      }
+    })     
+  }
+
+
+  return res.json({...result})
+})
+
 
 module.exports = router
