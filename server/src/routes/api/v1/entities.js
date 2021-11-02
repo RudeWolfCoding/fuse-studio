@@ -232,7 +232,13 @@ router.post('/owner/:communityAddress/:account', auth.required,  async (req, res
 
   const community = await Community.findOne({ communityAddress: communityAddress })
   const entity = await Entity.findOne({ account, communityAddress })
-  const result = {  account, community: community.name, creator: community.creatorAddress, isAdmin: false, isOwner: false , isAny: false } 
+  const result = { user:{
+    account,
+    accounts: [],
+  }, community: {
+    name: community.name,
+    creator: community.creatorAddress
+  }, isAdmin: false, isOwner: false , isAny: false } 
 
   try {
 
@@ -243,10 +249,11 @@ router.post('/owner/:communityAddress/:account', auth.required,  async (req, res
       result.isOwner = true;
     }
 
-    if (result.user.isAdmin && !result.user.isOwner) {
-      const userAccounts = await UserAccount.find({ studioUser: ObjectId(id) })
+    if (!result.isAdmin && !result.isOwner) {
+      const userAccounts = await UserAccount.find({ studioUser: ObjectId(id) }).lean()
+      result.user.accounts = userAccounts
       userAccounts.forEach(account => {
-        if (account === result.creator) {
+        if (account === result.community.creator) {
           result.isAny = true;
         }
       })
