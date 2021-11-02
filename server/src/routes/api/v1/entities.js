@@ -233,7 +233,8 @@ router.post('/owner/:communityAddress/:account', auth.required,  async (req, res
   const community = await Community.findOne({ communityAddress: communityAddress })
   const entity = await Entity.findOne({ account, communityAddress })
   const result = { user:{
-    test: 2,
+    id,
+    test: 3,
     account,
     accounts: [],
     all: []
