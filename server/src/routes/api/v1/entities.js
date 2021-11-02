@@ -246,7 +246,7 @@ router.post('/owner/:communityAddress/:account', auth.required,  async (req, res
     if (result.user.isAdmin && !result.user.isOwner) {
       const userAccounts = await UserAccount.find({ studioUser: ObjectId(id) })
       userAccounts.forEach(account => {
-        if (account === result.community.creatorAddress) {
+        if (account === result.creator) {
           result.isAny = true;
         }
       })
