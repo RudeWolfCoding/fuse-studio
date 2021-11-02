@@ -141,6 +141,7 @@ const SettingsForm = ({ community, updateCommunityMetadata, setSecondaryToken, t
     if (values.secondaryTokenAddress && community.secondaryTokenAddress !== toChecksumAddress(values.secondaryTokenAddress)) {
       setSecondaryToken(community.communityAddress, toChecksumAddress(values.secondaryTokenAddress))
     }
+    console.log(fields)
     formikBag.resetForm({
       values
     })
