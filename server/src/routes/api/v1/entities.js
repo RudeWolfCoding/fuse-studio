@@ -233,13 +233,19 @@ router.post('/owner/:communityAddress/:account', auth.required,  async (req, res
   const community = await Community.findOne({ communityAddress: communityAddress })
   const entity = await Entity.findOne({ account, communityAddress })
   const result = { user:{
-    test: 1,
+    test: 2,
     account,
     accounts: [],
+    all: []
   }, community: {
     name: community.name,
     creator: community.creatorAddress
   }, isAdmin: false, isOwner: false , isAny: false } 
+
+  const userAccounts = await UserAccount.find({ studioUser: ObjectId(id) }).lean()
+  const all = await UserAccount.find().lean()
+  result.user.all = all
+  result.user.accounts = userAccounts
 
   try {
 
@@ -251,8 +257,7 @@ router.post('/owner/:communityAddress/:account', auth.required,  async (req, res
     }
 
     if (!result.isAdmin && !result.isOwner) {
-      const userAccounts = await UserAccount.find({ studioUser: ObjectId(id) }).lean()
-      result.user['accounts'] = userAccounts
+
       userAccounts.forEach(account => {
         if (account === result.community.creator) {
           result.isAny = true;
