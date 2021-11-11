@@ -10,7 +10,6 @@ import { observer } from 'mobx-react'
 import { generalPlugins } from 'constants/plugins'
 import includes from 'lodash/includes'
 import get from 'lodash/get'
-import { useEffect } from 'react'
 
 const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
   return (
@@ -55,13 +54,7 @@ const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
   )
 }
 
-const Plugins = (    loadModal,
-  addCommunityPlugin,
-  community,
-  address,
-  isAdmin,
-  isOwner,
-  communityCreator) => {
+const Plugins = () => {
   const dispatch = useDispatch()
   const { dashboard } = useStore()
   const { address: communityAddress } = useParams()
@@ -73,6 +66,8 @@ const Plugins = (    loadModal,
       managePlugin: () => addPlugin(togglePlugin(key))
     }))
   }
+
+  dispatch(loadModal(SWITCH_ACCOUNT_MODAL))
 
   const handleTracker = (plugin) => {
     if (window && window.analytics) {
@@ -103,28 +98,13 @@ const Plugins = (    loadModal,
     return plugin
   }
 
-  useEffect(()=>{
-    console.log('Hi from effect')
-    loadModal(SWITCH_ACCOUNT_MODAL)
-    dispatch(isOwner(communityAddress, address))
-    console.log(isOwner, isAdmin)
-      if(isOwner && !isAdmin){
-        loadModal(SWITCH_ACCOUNT_MODAL), {
-        ...props,
-      }
-    }
-    return () =>{
-      dispatch(setDefault)
-    }
-  }, [dispatch])
-  
   return (
     <div className='plugins'>
       <h2 className='plugins__title'>Plugins</h2>
       <div className='plugins__wrapper'>
         <div className='plugins__content__wrapper'>
           <div className='plugins__content'>
-            t1 Plug-ins are contracts deployed on the Fuse chain that allow you to add functionality to your app with the click of a button.
+            Plug-ins are contracts deployed on the Fuse chain that allow you to add functionality to your app with the click of a button.
             Any plug-in you activate will open a new navigation menu that allows you to configure it's settings.
             Give it try!
           </div>
