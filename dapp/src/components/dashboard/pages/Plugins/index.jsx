@@ -148,6 +148,7 @@ const Plugins = ({
   }
 
   useEffect(()=>{
+    loadModal(SWITCH_ACCOUNT_MODAL)
     dispatch(isOwner(communityAddress, address))
       if(isOwner && !isAdmin){
         loadModal(SWITCH_ACCOUNT_MODAL), {
