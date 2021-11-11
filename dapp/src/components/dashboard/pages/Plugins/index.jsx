@@ -166,7 +166,7 @@ const Plugins = ({
       <div className='plugins__wrapper'>
         <div className='plugins__content__wrapper'>
           <div className='plugins__content'>
-            Plug-ins are contracts deployed on the Fuse chain that allow you to add functionality to your app with the click of a button.
+            t1 Plug-ins are contracts deployed on the Fuse chain that allow you to add functionality to your app with the click of a button.
             Any plug-in you activate will open a new navigation menu that allows you to configure it's settings.
             Give it try!
           </div>
