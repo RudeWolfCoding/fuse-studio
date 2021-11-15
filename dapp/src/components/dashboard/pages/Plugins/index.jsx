@@ -148,15 +148,8 @@ const Plugins = ({
   }
 
   useEffect(()=>{
-    console.log('Hi from effect')
-    loadModal(SWITCH_ACCOUNT_MODAL)
-    dispatch(isOwner(communityAddress, address))
-    console.log(isOwner, isAdmin)
-      if(isOwner && !isAdmin){
-        loadModal(SWITCH_ACCOUNT_MODAL), {
-        ...props,
-      }
-    }
+    dispatch(loadModal(SWITCH_ACCOUNT_MODAL))
+    
     return () =>{
       dispatch(setDefault)
     }

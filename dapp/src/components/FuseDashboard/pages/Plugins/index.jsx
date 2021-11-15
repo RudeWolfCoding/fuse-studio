@@ -10,6 +10,7 @@ import { observer } from 'mobx-react'
 import { generalPlugins } from 'constants/plugins'
 import includes from 'lodash/includes'
 import get from 'lodash/get'
+import { SWITCH_ACCOUNT_MODAL } from 'constants/uiConstants'
 
 const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
   return (
@@ -104,7 +105,7 @@ const Plugins = () => {
       <div className='plugins__wrapper'>
         <div className='plugins__content__wrapper'>
           <div className='plugins__content'>
-            t2 Plug-ins are contracts deployed on the Fuse chain that allow you to add functionality to your app with the click of a button.
+            FUSEDASH Plug-ins are contracts deployed on the Fuse chain that allow you to add functionality to your app with the click of a button.
             Any plug-in you activate will open a new navigation menu that allows you to configure it's settings.
             Give it try!
           </div>
