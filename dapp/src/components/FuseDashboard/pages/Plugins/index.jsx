@@ -10,7 +10,6 @@ import { observer } from 'mobx-react'
 import { generalPlugins } from 'constants/plugins'
 import includes from 'lodash/includes'
 import get from 'lodash/get'
-import { SWITCH_ACCOUNT_MODAL } from 'constants/uiConstants'
 
 const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
   return (
@@ -68,7 +67,6 @@ const Plugins = () => {
     }))
   }
 
-  dispatch(loadModal(SWITCH_ACCOUNT_MODAL))
 
   const handleTracker = (plugin) => {
     if (window && window.analytics) {
