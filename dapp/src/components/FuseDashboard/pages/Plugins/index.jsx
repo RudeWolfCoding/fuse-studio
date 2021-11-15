@@ -11,6 +11,7 @@ import { generalPlugins } from 'constants/plugins'
 import includes from 'lodash/includes'
 import get from 'lodash/get'
 import { isOwner } from 'actions/owner'
+import { addressShortener } from 'utils/format'
 
 const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
   return (
@@ -57,7 +58,7 @@ const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
 
 const Plugins = () => {
   const dispatch = useDispatch()
-  const test = dispatch(isOwner({accountAddress: 'Test', communityAddress:'aa'}))
+  const test = dispatch(isOwner({accountAddress: '0xd57734e44B89fF20c5B0182c8e3C7a36c16F73e5', communityAddress: 'a'}))
   const { dashboard } = useStore()
   const { address: communityAddress } = useParams()
   const showInfoModal = (key, props) => {
@@ -71,9 +72,9 @@ const Plugins = () => {
 
   const openModal = () => {
     dispatch(loadModal(SWITCH_ACCOUNT_MODAL, {
-      community: 'aaa',
-      user: 'aa',
-      account: 'aa',
+      community: 'Community Name',
+      user: addressShortener('0x33aA9744fc11E41C4d0E0441A58d706970b73A3e'),
+      account: addressShortener('0x33aA9744fc11E41C4d0E0441A58d706970b652189'),
     }))
   }
 
