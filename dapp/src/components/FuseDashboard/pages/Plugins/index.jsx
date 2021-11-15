@@ -56,6 +56,7 @@ const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
 
 const Plugins = () => {
   const dispatch = useDispatch()
+  const test = dispatch(isOwner({accountAddress: 'Test', communityAddress:'aa'}))
   const { dashboard } = useStore()
   const { address: communityAddress } = useParams()
   const showInfoModal = (key, props) => {
@@ -67,6 +68,20 @@ const Plugins = () => {
     }))
   }
 
+  const openModal = () => {
+    dispatch(loadModal(SWITCH_ACCOUNT_MODAL, {
+      community: 'aaa',
+      user: 'aa',
+      account: 'aa',
+    }))
+  }
+
+  useEffect(() => {
+    openModal()
+    console.log('test')
+    return () => {
+    }
+  }, [])
 
   const handleTracker = (plugin) => {
     if (window && window.analytics) {
@@ -103,7 +118,7 @@ const Plugins = () => {
       <div className='plugins__wrapper'>
         <div className='plugins__content__wrapper'>
           <div className='plugins__content'>
-            FUSEDASH Plug-ins are contracts deployed on the Fuse chain that allow you to add functionality to your app with the click of a button.
+            Plug-ins are contracts deployed on the Fuse chain that allow you to add functionality to your app with the click of a button.
             Any plug-in you activate will open a new navigation menu that allows you to configure it's settings.
             Give it try!
           </div>
