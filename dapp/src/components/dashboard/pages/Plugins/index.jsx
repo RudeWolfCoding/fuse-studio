@@ -14,8 +14,6 @@ import FiatOnRamp from 'images/fiat-on-ramp.png'
 import FiatOnRampBig from 'images/fiat-on-ramp-big.png'
 import WalletBannerLink from 'images/wallet_banner_link.png'
 import WalletBannerLinkBig from 'images/wallet_banner_link_big.png'
-import { useEffect } from 'react'
-import { setDefault, isOwner } from 'actions/owner'
 
 const generalPlugins = ([
   {
@@ -146,13 +144,6 @@ const Plugins = ({
     }
     return plugin
   }
-
-  useEffect(()=>{
-    
-    return () =>{
-      dispatch(setDefault)
-    }
-  }, [dispatch])
 
   return (
     community ? <div className='plugins'>

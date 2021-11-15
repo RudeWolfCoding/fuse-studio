@@ -12,6 +12,7 @@ import includes from 'lodash/includes'
 import get from 'lodash/get'
 import { isOwner } from 'actions/owner'
 import { addressShortener } from 'utils/format'
+import { SWITCH_ACCOUNT_MODAL } from 'constants/uiConstants'
 
 const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
   return (
