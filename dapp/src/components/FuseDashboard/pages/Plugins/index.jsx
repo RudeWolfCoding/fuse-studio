@@ -10,6 +10,7 @@ import { observer } from 'mobx-react'
 import { generalPlugins } from 'constants/plugins'
 import includes from 'lodash/includes'
 import get from 'lodash/get'
+import { isOwner } from 'actions/owner'
 
 const PluginList = ({ pluginList, showInfoModal, addPlugin, togglePlugin }) => {
   return (

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { push } from 'connected-react-router'
 import { useDispatch, useSelector } from 'react-redux'
-
 import MyCommunities from 'components/home/components/MyCommunities'
 import Faqs from 'components/home/components/Faq'
 import FeaturedCommunities from 'components/home/components/FeaturedCommunities'
@@ -11,8 +10,6 @@ import arrowImage from 'images/arrow_1.svg'
 import { fetchFeaturedCommunities } from 'actions/token'
 import { loadModal } from 'actions/ui'
 import { LOGIN_MODAL } from 'constants/uiConstants'
-import { SWITCH_ACCOUNT_MODAL } from 'constants/uiConstants'
-import { isOwner } from 'actions/owner'
 
 const HomePage = ({
   handleConnect
@@ -32,10 +29,6 @@ const HomePage = ({
     if (moveToIssuance && accountAddress) {
       dispatch(push('/view/issuance'))
     }
-    console.log('aa')
-    const test = dispatch(isOwner({accountAddress: 'Test', communityAddress:'aa'}))
-    console.log(test)
-  openModal()
   }, [moveToIssuance, accountAddress])
 
   const showIssuance = () => {
@@ -68,16 +61,6 @@ const HomePage = ({
     }
   }
 
- 
-  const openModal = (side) => {
-    console.log('works')
-    dispatch(loadModal(SWITCH_ACCOUNT_MODAL, {
-      community: 'aaa',
-      user: 'aa',
-      account: 'aa',
-   
-    }))
-  }
 
 
   return (
